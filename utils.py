@@ -1,4 +1,3 @@
-
 import hlt
 import logging
 
@@ -18,7 +17,16 @@ def find_closest_planet(ship,game_map,is_owned=False, isFriendly=False):
 		logging.info("Planete trouvee")
 	return nearest_planet
 
+def detectEnemies(map, planet, radius):
+	result = []
+	for player in map.all_players():
+		if player.id != map.get_me().id:
+			for ship in player.all_ships():
+				if planet.calculate_distance_between(ship) < radius:
+					result.append(ship)
+	return result
 
+<<<<<<< HEAD
 def find_closest_ship(ship,game_map, isFriendly=False):
 	# par défaut, renvoie la planete non occupee la plus proche, sinon renvoie la planete la plus proche en fonction de son proprietaire
 	me = game_map.get_me()
@@ -35,3 +43,12 @@ def find_closest_ship(ship,game_map, isFriendly=False):
 		logging.info("Planete trouvee")
 	return nearest_ship
 
+=======
+def isMapFullyOwned(map):
+	result = True;
+	for planet in map.all_planets():
+		if not planet.is_owned():
+			result = False
+			break
+	return result
+>>>>>>> 858ce2e97639adb2f3c48baa1c2eb0a80a01bcd6
