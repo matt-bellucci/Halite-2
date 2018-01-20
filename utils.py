@@ -52,11 +52,16 @@ def isMapFullyOwned(map):
 			break
 	return result
 
-def find_largest_planet(game_map, isOwned=True, isFriendly:True):
+def find_largest_planet(game_map,isOwned=True,isFriendly=True):
 	me = game_map.get_me()
 	planet_list = game_map.all_planets()
+	planet=None
+	k = 1
 	sorted_planet_list = sorted(planet_list, key = lambda x : x.radius, reverse=True)
-	result = next((planet for planet in sorted_planet_list[planet] if ((planet.is_owned()==isOwned) and (planet.owner()==me)==isFriendly)),None)
+	for planet in sorted_planet_list:
+		if (planet.is_owned()==isOwned and (planet.owner==me)==isFriendly):
+			result = planet
+			break
 	return result
 
 
