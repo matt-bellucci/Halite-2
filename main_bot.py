@@ -26,7 +26,7 @@ while True:
 							command_queue.append(nav_command)
 					continue
 			else:
-				planet = utils.find_closest_planet(ship,game_map,is_owned=True,is_friendly=True)
+				planet = utils.find_closest_planet(ship,game_map,isOwned=True,isFriendly=True)
 				enemy = utils.detectEnemies(game_map,planet,10)
 				if enemy != []:
 					target = enemy[0]
