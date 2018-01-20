@@ -64,5 +64,23 @@ def find_largest_planet(game_map,isOwned=True,isFriendly=True):
 			break
 	return result
 
+def findDefenselessPlanet(map):
+	result = []
+	number = 100
+	for planet in map.all_planets():
+		if not planet.is_owned():
+			temp = detectEnemies(map, planet, 3)
+			if number == temp
+				result.append(planet)
+			if number > temp
+				number = temp
+				result = []
+				result.append(planet)
+	return result
 
-
+def findClosestDefenselessPlanet(ship, listPlanet):
+	result = listPlanet[0]
+	for planet in listPlanet:
+		if (ship.calculate_distance_between(planet) < ship.calculate_distance_between(result)):
+			result = planet
+	return result
