@@ -26,7 +26,6 @@ def detectEnemies(map, planet, radius):
 					result.append(ship)
 	return result
 
-<<<<<<< HEAD
 def find_closest_ship(ship,game_map, isFriendly=False):
 	# par défaut, renvoie la planete non occupee la plus proche, sinon renvoie la planete la plus proche en fonction de son proprietaire
 	me = game_map.get_me()
@@ -43,7 +42,6 @@ def find_closest_ship(ship,game_map, isFriendly=False):
 		logging.info("Planete trouvee")
 	return nearest_ship
 
-=======
 def isMapFullyOwned(map):
 	result = True;
 	for planet in map.all_planets():
@@ -51,4 +49,4 @@ def isMapFullyOwned(map):
 			result = False
 			break
 	return result
->>>>>>> 858ce2e97639adb2f3c48baa1c2eb0a80a01bcd6
+
