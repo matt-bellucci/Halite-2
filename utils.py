@@ -27,10 +27,10 @@ def detectEnemies(map, planet, radius):
 					result.append(ship)
 	return result
 
-def find_closest_ship(ship,game_map, isFriendly=False):
+def find_closest_ship(entity,game_map, isFriendly=False):
 	# par défaut, renvoie la planete non occupee la plus proche, sinon renvoie la planete la plus proche en fonction de son proprietaire
 	me = game_map.get_me()
-	entities_by_distance = game_map.nearby_entities_by_distance(ship)
+	entities_by_distance = game_map.nearby_entities_by_distance(entity)
 	nearest_ship = None
 	for distance in sorted(entities_by_distance):
 		nearest_ship = next((nearest_entity for nearest_entity in entities_by_distance[distance] if (isinstance(nearest_entity, hlt.entity.Ship) and ((nearest_entity.owner==me)==isFriendly))),None)
