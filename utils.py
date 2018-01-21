@@ -1,13 +1,13 @@
 import hlt
 import logging
 
-def find_closest_planet(ship,game_map,isOwned=False, isFriendly=False):
+def find_closest_planet(ship,game_map,isOwned=False, isFriendly=False, target_list=[]):
 	# par défaut, renvoie la planete non occupee la plus proche, sinon renvoie la planete la plus proche en fonction de son proprietaire
 	me = game_map.get_me()
 	entities_by_distance = game_map.nearby_entities_by_distance(ship)
 	nearest_planet = None
 	for distance in sorted(entities_by_distance):
-		nearest_planet = next((nearest_entity for nearest_entity in entities_by_distance[distance] if (isinstance(nearest_entity, hlt.entity.Planet) and (nearest_entity.is_owned() == isOwned) and ((nearest_entity.owner==me)==isFriendly))),None)
+		nearest_planet = next((nearest_entity for nearest_entity in entities_by_distance[distance] if (isinstance(nearest_entity, hlt.entity.Planet) and (nearest_entity.is_owned() == isOwned) and ((nearest_entity.owner==me)==isFriendly and not nearest_entity in target_list))),None)
 		if nearest_planet:
 			break
 	if nearest_planet==None:
@@ -65,17 +65,19 @@ def find_largest_planet(game_map,isOwned=True,isFriendly=True):
 	return result
 
 def findDefenselessPlanet(map):
+	me = map.get_me()
 	result = []
 	number = 100
 	for planet in map.all_planets():
-		if not planet.is_owned():
-			temp = detectEnemies(map, planet, 3)
-			if number == temp
+		if (planet.is_owned() and planet.owner!=me):
+			temp = len(detectEnemies(map, planet, 2))
+			if number == temp:
 				result.append(planet)
-			if number > temp
+			if number > temp:
 				number = temp
 				result = []
 				result.append(planet)
+
 	return result
 
 def findClosestDefenselessPlanet(ship, listPlanet):
